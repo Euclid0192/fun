@@ -6,15 +6,19 @@ import {
     Text,
     Image,
     Dimensions,
-    FlatList
+    FlatList,
+    Pressable
 } from 'react-native'
 
 const { width, height } = Dimensions.get('window');
 const allPadding = WIDTH(10);
 
-const Item = ({item}: {item: any}) => {
+const Item = ({item, navigation}: {item: any, navigation: any}) => {
     return (
-        <View style={styles.containerItem}>
+        <Pressable 
+            style={styles.containerItem}
+            onPress={() => navigation.navigate('Bai Hat', {id: item.encodeId})}
+        >
             <Image 
                 style={styles.image}
                 source={{uri: item.thumbnailM}}
@@ -24,18 +28,18 @@ const Item = ({item}: {item: any}) => {
                 <Text style={styles.albumTitle}>{item.title}</Text>
                 <Text>{item.artistsNames}</Text>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
-const BaiHatMoi = ({data}: {data: any}) => {
+const BaiHatMoi = ({data, navigation}: {data: any, navigation: any}) => {
     let Items = [];
     const BaiHatMoi = data?.items?.[2].items?.all;
     if (BaiHatMoi){
         // console.log(BaiHatMoi)
         for (let i = 0; i < 10; i++){
             Items.push(
-                <Item item={BaiHatMoi[i]} />
+                <Item item={BaiHatMoi[i]} navigation={navigation} />
             )
         }
     } // of if

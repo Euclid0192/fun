@@ -7,7 +7,8 @@ import {
     ImageBackground,
     Image,
     FlatList,
-    ActivityIndicator
+    ActivityIndicator,
+    Pressable
 } from 'react-native'
 
 import Footer from '../../Footer/Footer'
@@ -16,9 +17,11 @@ import { HEIGHT , WIDTH} from '../Slider/SliderList'
 
 const { width, height } = Dimensions.get('window')
 
-const Item = ({item, index}: {item: any, index: number}) => {
+const Item = ({item, index, navigation}: {item: any, index: number, navigation: any}) => {
     return (
-        <View style={[styles.content, {backgroundColor: index % 2 == 0? '#eeeeee':'#e9e9e9'}]}>
+        <Pressable style={[styles.content, {backgroundColor: index % 2 == 0? '#eeeeee':'#e9e9e9'}]}
+            onPress={() => navigation.navigate('Bai Hat', {id: item.encodeId})}
+        >
             <View style={{marginLeft: WIDTH(13), justifyContent: 'center', alignItems:'center'}}>
                 <Text style={styles.index}>{index + 1}</Text>
             </View>
@@ -26,7 +29,7 @@ const Item = ({item, index}: {item: any, index: number}) => {
                 <Text style={styles.index}>{item.title}</Text>
                 <Text>{item.artistsNames}</Text>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
@@ -67,7 +70,7 @@ const ChillDetails = ({navigation, route}: {navigation: any, route: any}) => {
             <FlatList
                 data={data.song?.items}
                 renderItem={({item, index}) => {
-                    return <Item item={item} index={index} />
+                    return <Item item={item} index={index} navigation={navigation}/>
                 }}
             ></FlatList>
         },

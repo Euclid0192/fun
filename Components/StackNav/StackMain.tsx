@@ -7,6 +7,7 @@ import SignUp from '../Authentication/SignUp';
 import SignIn from '../Authentication/SignIn';
 import { TrangChu } from '../TrangChu/TrangChu';
 import DoiMatKhau from '../Authentication/DoiMatKhau';
+import PlayingSong from '../PlayingSong/PlayingSong';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ const StackMain = () => {
     <Stack.Navigator
         initialRouteName='Tab Trang Chu'
         screenOptions={{
-            headerShown: false
+            headerShown: true
         }}
     >
         <Stack.Screen 
@@ -45,6 +46,10 @@ const StackMain = () => {
         <Stack.Screen
             name='Doi Mat Khau'
             component={DoiMatKhau}
+        />
+        <Stack.Screen 
+            name='Bai Hat'
+            component={PlayingSong}
         />
     </Stack.Navigator>
     )

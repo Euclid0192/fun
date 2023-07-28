@@ -71,7 +71,7 @@ export const TrangChu = ({navigation}: {navigation: any}) => {
       },
       {
         id: 3,
-        content: <BaiHatMoi data={data}/>
+        content: <BaiHatMoi data={data} navigation={navigation}/>
       },
       {
         id: 4,
