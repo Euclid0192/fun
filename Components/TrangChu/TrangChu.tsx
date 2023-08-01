@@ -23,7 +23,7 @@ import AlbumHot from './AlbumHot/AlbumHot';
 import { WIDTH, HEIGHT } from './Slider/SliderList';
 import Footer from '../Footer/Footer';
 import ZINGCHART from '../ZingChart/ZingChart';
-import NHACCANHAN from '../NhacCaNhan/NhacCaNhan';
+import NHACCANHAN from '../Ca Nhan/TrangCaNhan';
 
 //Navigation
 import FloatingButton from '../Footer/FloatingButton';

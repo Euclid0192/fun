@@ -1,13 +1,14 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
-import { TrangChu } from '../TrangChu/TrangChu';
-import ZINGCHART from '../ZingChart/ZingChart';
-import NHACCANHAN from '../NhacCaNhan/NhacCaNhan';
+import { TrangChu } from '../../TrangChu/TrangChu';
+import ZINGCHART from '../../ZingChart/ZingChart';
+import NHACCANHAN from '../../Ca Nhan/TrangCaNhan';
+import HeaderBar from '../StackNav/HeaderBar';
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabTrangChu = () => {
+const TabTrangChu = ({navigation}: {navigation: any}) => {
     return (
       <Tab.Navigator
         initialRouteName='Trang Chu'
@@ -32,7 +33,7 @@ const TabTrangChu = () => {
         <Tab.Screen
           name='Nhac ca nhan'
           component={NHACCANHAN}
-          options={{ tabBarLabel: 'NHẠC CÁ NHÂN'}}
+          options={{ tabBarLabel: 'TRANG CÁ NHÂN'}}
         />
       </Tab.Navigator>
     )

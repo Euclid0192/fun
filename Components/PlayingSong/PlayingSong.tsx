@@ -40,7 +40,8 @@ const TrackProgress = () => {
         <Slider 
             style={{ width: WIDTH(300), height: HEIGHT(40)}}
             value={position}
-            onValueChange={(value) => setValue(value)}
+            //Di chuyen slider de tua nhac
+            onValueChange={(value) => {setValue(value); TrackPlayer.seekTo(value)}}
             step={1}
             minimumValue={0}
             maximumValue={duration}
@@ -57,7 +58,7 @@ const TrackProgress = () => {
 const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
     //Spinning Disc Animation
     const spinValue = useRef(new Animated.Value(0)).current
-
+    const { position, duration } = useProgress(200)
 
     Animated.loop(
         Animated.timing(
@@ -95,13 +96,21 @@ const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
         }
 
         setIsPlayerReady(isSetup);
+        TrackPlayer.play()
+        TrackPlayer.setVolume(1)
     }
 
+    const backHandler = async () => {
+        await TrackPlayer.pause()
+        await TrackPlayer.reset()
+        navigation.goBack()
+    }
     //End Track
     useEffect(() => {
         getMainData(`https://api-zingmp3-vercel.vercel.app/api/infosong?id=${songID}`)
         setUp();
     }, [])
+
 
     const getMainData = async (link: string) => {
         setLoading(true)
@@ -124,6 +133,7 @@ const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
         )
     } // of if
 
+    // else TrackPlayer.play()
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -133,6 +143,13 @@ const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
                 resizeMode='stretch'
             >
                 <View style={styles.containerDisc}>
+                    <Pressable style={styles.back} onPress={backHandler}>
+                        <AntDesign
+                            name='back'
+                            size={24}
+                            color='white'
+                        />
+                    </Pressable>
                     <Animated.Image 
                         source={{uri: data?.thumbnail}}
                         style={[styles.disc, {transform: [{rotate: Spin}]}]}
@@ -143,7 +160,7 @@ const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
                             size={24}
                             color='white'
                         />
-                        <Text style={{fontSize: HEIGHT(20), color: 'white'}}>{data?.title}</Text>
+                        <Text style={styles.title}>{data?.title}</Text>
                         <Pressable onPress={() => {
                             setLiked(!liked)
                         }}>
@@ -164,6 +181,14 @@ const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
                             size={28}
                             color='white'
                         />
+                        {/* Tua nguoc 15s */}
+                        <Pressable onPress={() => TrackPlayer.seekTo(position - 15)}>
+                            <AntDesign 
+                                name='banckward'
+                                size={28}
+                                color='white'
+                            />                              
+                        </Pressable>
                         <Pressable onPress={() => {
                             playing ? TrackPlayer.pause() : TrackPlayer.play();
                             setPlaying(!playing)
@@ -174,6 +199,15 @@ const PlayingSong = ({navigation, route} : {navigation: any, route: any}) => {
                                 color='white'
                             />                            
                         </Pressable>
+                        {/* Tua di 15s */}
+                        <Pressable onPress={() => TrackPlayer.seekTo(position + 15)}>
+                            <AntDesign 
+                                name='forward'
+                                size={28}
+                                color='white'
+                            />                              
+                        </Pressable>
+
                         <AntDesign 
                             name='stepforward'
                             size={28}
@@ -234,5 +268,18 @@ const styles = StyleSheet.create({
         fontSize: HEIGHT(20),
         fontWeight: 'bold',
         color: 'white'
+    },
+    back: {
+        position: 'absolute',
+        left: WIDTH(30),
+        top: HEIGHT(30),
+    },
+    title: {
+        fontSize: HEIGHT(20), 
+        color: 'white',
+        width: WIDTH(250),
+        flexShrink: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

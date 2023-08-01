@@ -5,10 +5,12 @@ import {
   Text
 } from 'react-native'
 
-import TabTrangChu from './Components/TabMain/TabTrangChu';
-import StackMain from './Components/StackNav/StackMain';
+import TabTrangChu from './Components/Navigation/TabMain/TabTrangChu';
+import StackMain from './Components/Navigation/StackNav/StackMain';
+import MainDrawer from './Components/Navigation/Drawer/Drawer';
 
 import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler'
 
 
 const App = () => {

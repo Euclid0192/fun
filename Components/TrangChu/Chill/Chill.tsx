@@ -10,7 +10,6 @@ import {
     Pressable
 } from 'react-native'
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const { width, height } = Dimensions.get('window');
 const allPadding = WIDTH(10);

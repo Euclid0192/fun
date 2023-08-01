@@ -16,7 +16,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 
 const { width, height } = Dimensions.get('window')
 
-const NHACCANHAN = ({navigation}: {navigation: any}) => {
+const TrangCaNhan = ({navigation}: {navigation: any}) => {
     const [ userSignin, setUserSignin ] = useState(false)
 
     const auth = AUTH;
@@ -124,7 +124,7 @@ const NHACCANHAN = ({navigation}: {navigation: any}) => {
     )
 }
 
-export default NHACCANHAN
+export default TrangCaNhan
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -189,3 +189,5 @@ const styles = StyleSheet.create({
 // Pass: 12345678  
 // 2. hoho@gmail.com   
 // Pass: helloroger -> hello1234
+// 3. hellozing@gmail.com  
+// Pass: zingmp3

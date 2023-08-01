@@ -14,6 +14,8 @@ import {
 import Footer from '../../Footer/Footer'
 import FloatingButton from '../../Footer/FloatingButton'
 import { HEIGHT , WIDTH} from '../Slider/SliderList'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 const { width, height } = Dimensions.get('window')
 
@@ -37,6 +39,7 @@ const AlbumDetails = ({navigation, route}: {navigation: any, route: any}) => {
     const [data, setData] = useState<any[]>([])
     const playlistID = route.params?.id;
     const [ loading, setLoading ] = useState(false)
+    const [ liked, setLiked ] = useState(false)
 
     useEffect(() => {
         getMainData(`https://api-zingmp3-vercel.vercel.app/api/detailplaylist?id=${playlistID}`)
@@ -89,10 +92,24 @@ const AlbumDetails = ({navigation, route}: {navigation: any, route: any}) => {
                 style={styles.imageBackground}
                 resizeMode='stretch'
             >
+                <Pressable style={styles.back} onPress={() => navigation.goBack()}>
+                    <AntDesign
+                        name='back'
+                        size={25}
+                        color='white'
+                    />
+                </Pressable>
                 <Image
                     source={{uri: data?.thumbnail }}
                     style={styles.imageThumbnail}
                 />
+                <Pressable onPress={() => setLiked(!liked)}>
+                    <Entypo
+                        name={liked? 'heart' : 'heart-outlined'}
+                        size={25}
+                        color='white'
+                    />                            
+                </Pressable>             
                 <Text style={styles.albumTitle}>{data?.title}</Text>
             </ImageBackground>
         </View>
@@ -149,7 +166,9 @@ const styles = StyleSheet.create({
     albumTitle:{
         fontSize: WIDTH(30),
         fontWeight: 'bold',
-        color: 'white'
+        color: 'white',
+        marginLeft: WIDTH(10),
+        marginRight: WIDTH(10)
     },
     contentTilte: {
         fontSize: HEIGHT(20),
@@ -168,5 +187,10 @@ const styles = StyleSheet.create({
         fontSize: HEIGHT(14),
         fontWeight: 'bold',
         color: 'black'
+    },
+    back: {
+        position: 'absolute',
+        left: WIDTH(30),
+        top: HEIGHT(30),
     }
 })

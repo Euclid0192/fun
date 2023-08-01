@@ -6,6 +6,8 @@ import { initializeApp } from "firebase/app";
 
 // //Authentication
 import { getAuth } from 'firebase/auth'
+//Realtime Database
+import { getDatabase } from 'firebase/database'
 // // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCVzA1gafbvZ7H-2m0MriSWsVnAQi3qeLQ",
@@ -21,3 +23,4 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig)
 //Initialize Firebase Authenticaion and get a ref to the service
 export const AUTH = getAuth(firebaseApp)
+export const database = getDatabase();
