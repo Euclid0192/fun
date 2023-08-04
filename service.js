@@ -44,7 +44,7 @@ import TrackPlayer, {
     await TrackPlayer.add([
       {
         id: '1',
-        url: require('./Assets/MP3/PhoKhongEm.mp3'),
+        url: require('./src/Assets/MP3/PhoKhongEm.mp3'),
         title: 'Fluidity',
         artist: 'tobylane',
         duration: 60,
